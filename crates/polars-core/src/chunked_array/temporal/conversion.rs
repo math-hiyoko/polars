@@ -36,8 +36,7 @@ impl From<&AnyValue<'_>> for NaiveTime {
 
 // Used by lazy for literal conversion
 pub fn datetime_to_timestamp_ns(v: NaiveDateTime) -> i64 {
-    let us = v.and_utc().timestamp() * 1_000_000_000; //nanos
-    us + v.and_utc().timestamp_subsec_nanos() as i64
+    v.and_utc().timestamp_nanos()
 }
 
 pub fn datetime_to_timestamp_ms(v: NaiveDateTime) -> i64 {
@@ -45,8 +44,7 @@ pub fn datetime_to_timestamp_ms(v: NaiveDateTime) -> i64 {
 }
 
 pub fn datetime_to_timestamp_us(v: NaiveDateTime) -> i64 {
-    let us = v.and_utc().timestamp() * 1_000_000;
-    us + v.and_utc().timestamp_subsec_micros() as i64
+    v.and_utc().timestamp_micros()
 }
 
 pub(crate) fn naive_datetime_to_date(v: NaiveDateTime) -> i32 {
